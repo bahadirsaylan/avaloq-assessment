@@ -4,5 +4,5 @@ databaseChangeLog:
           author: bsaylan
           changes:
               - sql:
-                    dbms: h2, mysql
-                    sql: select * from country
+                    dbms: h2
+                    sql: select * from simulation
