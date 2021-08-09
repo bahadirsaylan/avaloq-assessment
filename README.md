@@ -12,7 +12,7 @@ Postman collection located in `/postman` folder
 * `POST /v1/simulation` - runs the simulation with following request body:
 ```
   {
-   "dices": "{numberOfDice}",
+   "dices": "{numberOfDices}",
    "sides": "{numberOfSides}",
    "rolls": "{numberOfRolls}"
   }
@@ -21,7 +21,7 @@ Postman collection located in `/postman` folder
 * `GET /v1/simulation/result` - returns all simulation results
 * `GET /v1/simulation/stats?dices={numberOfDice}&sides={numberOfSides}` - returns stats for given number of dices and sides
 * `GET /v1/simulation/distributions?dices={numberOfDice}&sides={numberOfSides}` - returns overall distributions for given dices and sides numbers
-* `GET /v1/simulation/distribution?dices={numberOfDice}&sides={numberOfSides}&dicesSum={dicesSum}` - return a random distribution for `numberOfDice` dices, with `numberOfSides` sides and for `dicesSum`.
+* `GET /v1/simulation/distribution?dices={numberOfDice}&sides={numberOfSides}&dicesSum={dicesSum}` - return a random distribution for `numberOfDice` dices, with `numberOfSides` sides and for `dicesSum` sum value.
 
 All parameters for above methods are required. If any parameter is missing returns response with status.
 
@@ -47,23 +47,23 @@ The resulting ```avaloq-api.jar ``` will be located in ```target/``` and
 
 ```avaloq/api  0.0.1-SNAPSHOT``` docker image will be created.
 
-##Testing
+## Testing
 
 In order to run only tests:
 
 ```$ mvn clean test```
 
-##Run Docker
+## Run Docker
 
 In order to run docker container:
 
 ```$ docker run avaloq/api:0.0.1-SNAPSHOT```
 
-##Run SpringBoot
+## Run SpringBoot
 
 ```$ mvn spring-boot:run```
 
-##Push Docker Image to ECR
+## Push Docker Image to ECR
 
 Install AWS CLI and then run following command to push docker image to ECR registry.
 
