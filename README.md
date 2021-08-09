@@ -4,7 +4,8 @@ This project contains rest API endpoints for performing random dice rolling simu
 ## API definitions
 To visit full API definitions go to: `http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config`
 
-##Postman Collection
+## Postman Collection
+
 Postman collection located in `/postman` folder
 
 ## Endpoints
