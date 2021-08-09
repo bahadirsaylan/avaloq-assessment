@@ -2,7 +2,7 @@
 This project contains rest API endpoints for performing random dice rolling simulations.
 
 ## API definitions
-To visit full API definitions go to: `http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config`
+For API definitions go to: `http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config`
 
 ## Postman Collection
 
@@ -20,7 +20,7 @@ Postman collection located in `/postman` folder
 * `GET /v1/simulation` - returns all simulations
 * `GET /v1/simulation/result` - returns all simulation results
 * `GET /v1/simulation/stats?dices={numberOfDice}&sides={numberOfSides}` - returns stats for given number of dices and sides
-* `GET /v1/simulation/distributions?dices={numberOfDice}&sides={numberOfSides}` - returns overall distributions for given dices and sides numbers
+* `GET /v1/simulation/distributions?dices={numberOfDice}&sides={numberOfSides}` - returns overall distributions for given dices and sides values
 * `GET /v1/simulation/distribution?dices={numberOfDice}&sides={numberOfSides}&dicesSum={dicesSum}` - return a random distribution for `numberOfDice` dices, with `numberOfSides` sides and for `dicesSum` sum value.
 
 All parameters for above methods are required. If any parameter is missing returns response with BAD_REQUEST status.
