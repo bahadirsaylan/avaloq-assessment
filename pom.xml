@@ -9,12 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.avaloq</groupId>
-	<artifactId>api</artifactId>
+	<artifactId>avaloq-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Avaloq API</name>
-	<description>Avaloq Subscription</description>
+	<description>Avaloq Assessment</description>
 	<properties>
 		<java.version>8</java.version>
+		<docker-maven-plugin.version>1.0.0</docker-maven-plugin.version>
+		<docker.image.name>api</docker.image.name>
+		<docker.image.prefix>avaloq</docker.image.prefix>
+		<docker.registry.host>host</docker.registry.host>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -37,7 +41,6 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-rest-hal-explorer</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -64,9 +67,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>avaloq-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -92,6 +101,55 @@
                 </executions>
                 -->
             </plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker-maven-plugin.version}</version>
+				<configuration>
+					<skipDocker>false</skipDocker>
+					<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.${project.packaging}</include>
+							<targetPath>/</targetPath>
+						</resource>
+					</resources>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build</id>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<configuration>
+							<imageName>${docker.image.prefix}/${docker.image.name}:${project.version}</imageName>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>tag</id>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<forceTags>true</forceTags>
+							<image>${docker.image.prefix}/${docker.image.name}:${project.version}</image>
+							<newName>${docker.registry.host}/${docker.image.prefix}/${docker.image.name}:${project.version}</newName>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>push</id>
+						<goals>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<imageName>${docker.registry.host}/${docker.image.prefix}/${docker.image.name}:${project.version}</imageName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

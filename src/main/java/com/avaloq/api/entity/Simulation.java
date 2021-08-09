@@ -3,23 +3,19 @@ package com.avaloq.api.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Table(name= "simulation")
-@Getter @Setter @NoArgsConstructor
-public class Simulation implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+@Data
+public class Simulation extends UpdatableAbstractEntity implements Serializable {
 
     @Column
-    private String name;
+    private Integer dices;
 
-    public Simulation(String name){
-        this.name = name;
-    }
+    @Column
+    private Integer sides;
+
+    @Column
+    private Integer rolls;
+
 }

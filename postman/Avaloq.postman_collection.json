@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "fdd8e91b-d848-4574-8472-840fcaa0bca6",
+		"name": "Avaloq",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Run Simulation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": false
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": false
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sides\": 6, \n\t\"dices\": 4,\n\t\"rolls\": 10\n\t\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/simulation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"simulation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Results",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/simulation/result",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"simulation",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Stats",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/simulation/stats?dices=4&sides=6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"simulation",
+						"stats"
+					],
+					"query": [
+						{
+							"key": "dices",
+							"value": "4"
+						},
+						{
+							"key": "sides",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Distributions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/simulation/distributions?dices=4&sides=6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"simulation",
+						"distributions"
+					],
+					"query": [
+						{
+							"key": "dices",
+							"value": "4"
+						},
+						{
+							"key": "sides",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulation Relative Distribution By DiceSum",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"dices\": 4,\n\t\"sides\": 6,\n\t\"dicesSum\": 13\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/v1/simulation/distribution?dices=4&sides=6&dicesSum=13",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"simulation",
+						"distribution"
+					],
+					"query": [
+						{
+							"key": "dices",
+							"value": "4"
+						},
+						{
+							"key": "sides",
+							"value": "6"
+						},
+						{
+							"key": "dicesSum",
+							"value": "13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Simulations",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": false
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": false
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/v1/simulation",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"simulation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

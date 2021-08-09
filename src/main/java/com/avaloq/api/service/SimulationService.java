@@ -1,53 +1,23 @@
 package com.avaloq.api.service;
 
-import com.avaloq.api.model.request.RollRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.avaloq.api.domain.stats.SimulationRelativeDistribution;
+import com.avaloq.api.domain.stats.SimulationStatsByDiceAndSide;
+import com.avaloq.api.exception.APIGenericException;
+import com.avaloq.api.model.dto.SimulationDto;
+import com.avaloq.api.model.dto.SimulationResultDto;
+import com.avaloq.api.model.dto.SimulationRunResult;
+import com.avaloq.api.model.request.SimulationRunRequest;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validator;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 
-@Service
-public class SimulationService implements Serializable {
 
-    @Autowired
-    private Validator validator;
+public interface SimulationService {
 
-    public HashMap<Integer, Integer> roll(RollRequest rollRequest){
-        Set<ConstraintViolation<RollRequest>> violations = validator.validate(rollRequest);
-        if (!violations.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            for (ConstraintViolation<RollRequest> constraintViolation : violations) {
-                sb.append(constraintViolation.getMessage());
-            }
-            throw new ConstraintViolationException("Please check errors", violations);
-        }
-
-        HashMap<Integer, Integer> results = new HashMap<>();
-        int currentValue = 0;
-        for(int i = rollRequest.getDices(); i <= rollRequest.getSides()*rollRequest.getDices(); i++){
-            results.put(i,0);
-        }
-
-        for(int i = 0; i < rollRequest.getRolls(); i++){
-            int rollSum = 0;
-            for(int j=0; j < rollRequest.getDices(); j++){
-                rollSum += (int) Math.floor(rollRequest.getSides() * Math.random()) + 1;
-            }
-
-            if(results.get(rollSum) == null){
-                results.put(rollSum, 1);
-            }else{
-                currentValue = results.get(rollSum);
-                results.put(rollSum, currentValue+1);
-            }
-        }
-
-        return results;
-    }
+    SimulationRunResult simulate(SimulationRunRequest rollRequest);
+    SimulationStatsByDiceAndSide getSimulationStatsByDiceAndSide(int dices, int sides) throws  APIGenericException;
+    List<SimulationResultDto> getResults();
+    List<SimulationDto> getSimulations();
+    List<SimulationRelativeDistribution> getRelativeDistribution(int dices, int sides) throws  APIGenericException;
+    SimulationRelativeDistribution getRelativeDistribution(int dices, int sides, int dicesSum) throws  APIGenericException;
 
 }
