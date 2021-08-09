@@ -23,7 +23,7 @@ Postman collection located in `/postman` folder
 * `GET /v1/simulation/distributions?dices={numberOfDice}&sides={numberOfSides}` - returns overall distributions for given dices and sides numbers
 * `GET /v1/simulation/distribution?dices={numberOfDice}&sides={numberOfSides}&dicesSum={dicesSum}` - return a random distribution for `numberOfDice` dices, with `numberOfSides` sides and for `dicesSum` sum value.
 
-All parameters for above methods are required. If any parameter is missing returns response with status.
+All parameters for above methods are required. If any parameter is missing returns response with BAD_REQUEST status.
 
 ## Building
 Requirements:
