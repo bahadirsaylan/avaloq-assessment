@@ -34,14 +34,14 @@ public class SimulationController {
 
     @PostMapping("/simulation")
     @ResponseBody
-    @Operation(summary = "Requests relative statistics compared to the total rolls for all the simulations.")
+    @Operation(summary = "Runs simulations for given dices , sides and solls input.")
     @ApiResponse(
             responseCode = "200",
-            description = " For a given dice number–dice side combination, returns the relative distribution, compared to the total rolls, for all the simulations. ",
+            description = " For a given dice number–dice side combination, returns the simulation and dice sums ",
             content = @Content(schema = @Schema(implementation = SimulationRunResponse.class)))
     @ApiResponse(
             responseCode = "404",
-            description = " Returned when no distribution is found for given dice and given sides. ")
+            description = " Returned when input is invalid ")
     public ResponseEntity<SimulationRunResponse> simulate(
             @Valid @RequestBody SimulationRunRequest simulationRunRequest) {
 
@@ -58,6 +58,12 @@ public class SimulationController {
     }
 
     @GetMapping("/simulation")
+    @ResponseBody
+    @Operation(summary = "Query all simulations on database.")
+    @ApiResponse(
+            responseCode = "200",
+            description = " Returns simulations list ",
+            content = @Content(schema = @Schema(implementation = SimulationRunResponse.class)))
     public ResponseEntity<List<SimulationDto>> getSimulations() {
         return ResponseEntity.ok(simulationService.getSimulations());
     }
